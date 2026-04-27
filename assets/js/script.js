@@ -109,4 +109,100 @@
       }
     });
   }
+
+  // ---------------------------
+  // Reviews carousel
+  // ---------------------------
+  document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+    const track = carousel.querySelector('.reviews-track');
+    const cards = carousel.querySelectorAll('.review-card');
+    const prevBtn = carousel.querySelector('[data-carousel-prev]');
+    const nextBtn = carousel.querySelector('[data-carousel-next]');
+    const dotsContainer = carousel.querySelector('[data-carousel-dots]');
+    if (!track || !cards.length) return;
+
+    const cardsPerPage = () => {
+      const w = window.innerWidth;
+      if (w < 600) return 1;
+      if (w < 900) return 2;
+      return 3;
+    };
+
+    const totalPages = () => Math.max(1, Math.ceil(cards.length / cardsPerPage()));
+
+    // Build dots
+    const renderDots = () => {
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i < totalPages(); i++) {
+        const dot = document.createElement('button');
+        dot.className = 'reviews-dot';
+        dot.setAttribute('aria-label', `Page ${i + 1}`);
+        dot.addEventListener('click', () => goToPage(i));
+        dotsContainer.appendChild(dot);
+      }
+      updateDots();
+    };
+
+    const updateDots = () => {
+      if (!dotsContainer) return;
+      const cardWidth = cards[0].offsetWidth + parseFloat(getComputedStyle(track).gap || '24');
+      const current = Math.round(track.scrollLeft / (cardWidth * cardsPerPage()));
+      dotsContainer.querySelectorAll('.reviews-dot').forEach((d, i) => {
+        d.classList.toggle('is-active', i === current);
+      });
+    };
+
+    const goToPage = (page) => {
+      const cardWidth = cards[0].offsetWidth + parseFloat(getComputedStyle(track).gap || '24');
+      track.scrollTo({ left: cardWidth * cardsPerPage() * page, behavior: 'smooth' });
+    };
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        const cardWidth = cards[0].offsetWidth + parseFloat(getComputedStyle(track).gap || '24');
+        track.scrollBy({ left: -cardWidth * cardsPerPage(), behavior: 'smooth' });
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const cardWidth = cards[0].offsetWidth + parseFloat(getComputedStyle(track).gap || '24');
+        track.scrollBy({ left: cardWidth * cardsPerPage(), behavior: 'smooth' });
+      });
+    }
+
+    let scrollTimeout;
+    track.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(updateDots, 80);
+    });
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(renderDots, 200);
+    });
+
+    renderDots();
+  });
+
+  // ---------------------------
+  // Realisations filter
+  // ---------------------------
+  const filterPills = document.querySelectorAll('[data-filter]');
+  if (filterPills.length) {
+    filterPills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const target = pill.dataset.filter;
+        filterPills.forEach((p) => p.classList.toggle('is-active', p === pill));
+        document.querySelectorAll('[data-category]').forEach((item) => {
+          if (target === 'all' || item.dataset.category === target) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
 })();
