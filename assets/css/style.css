@@ -566,15 +566,16 @@ h1, h2, h3, h4 {
 .gallery-item__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(10, 31, 68, 0.9) 0%, transparent 60%);
+  background: linear-gradient(to top, rgba(6, 15, 38, 0.92) 0%, rgba(6, 15, 38, 0.45) 45%, transparent 75%);
   display: flex;
   align-items: flex-end;
   padding: 1.75rem;
-  opacity: 0.85;
+  opacity: 1;
   transition: opacity 0.3s;
 }
 .gallery-item__caption {
   color: var(--color-cream);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 .gallery-item__caption strong {
   font-family: var(--font-serif);
@@ -582,6 +583,7 @@ h1, h2, h3, h4 {
   font-weight: 500;
   display: block;
   margin-bottom: 0.25rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 .gallery-item__caption span {
   font-size: 0.75rem;
@@ -1780,6 +1782,66 @@ img { max-width: 100%; display: block; }
 .text-center { text-align: center; }
 .mt-12 { margin-top: 3rem; }
 .mb-16 { margin-bottom: 4rem; }
+
+/* ============== MOBILE — Contraste textes sur photos ============== */
+
+@media (max-width: 768px) {
+  /* Gallery captions : overlay plus opaque + texte plus gros */
+  .gallery-item__overlay {
+    background: linear-gradient(to top,
+      rgba(6, 15, 38, 0.96) 0%,
+      rgba(6, 15, 38, 0.7) 50%,
+      rgba(6, 15, 38, 0.25) 100%);
+    padding: 1.25rem;
+  }
+  .gallery-item__caption strong {
+    font-size: 1.15rem;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+  }
+  .gallery-item__caption span {
+    font-size: 0.7rem;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Hero principal : overlay vertical au lieu d'horizontal sur mobile */
+  .hero__overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(6, 15, 38, 0.55) 0%,
+      rgba(6, 15, 38, 0.85) 70%,
+      rgba(6, 15, 38, 0.95) 100%
+    ) !important;
+  }
+
+  /* Hero principal : titre + sous-titre plus marqués */
+  .hero__title {
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+  }
+  .hero__subtitle {
+    color: rgba(248, 245, 240, 0.92) !important;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Page hero secondaire : overlay encore plus présent sur mobile */
+  .page-hero::after {
+    background: linear-gradient(
+      180deg,
+      rgba(6, 15, 38, 0.92) 0%,
+      rgba(10, 31, 68, 0.85) 100%
+    ) !important;
+  }
+  .page-hero h1 {
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+  }
+  .page-hero p {
+    color: rgba(248, 245, 240, 0.92) !important;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Réduire intensité photo de fond hero sur mobile pour meilleure lisibilité */
+  .page-hero__bg { opacity: 0.45; }
+  .hero__bg { filter: brightness(0.75); }
+}
 
 /* Scroll-jack guard */
 @media (prefers-reduced-motion: reduce) {
