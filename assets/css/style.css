@@ -1676,31 +1676,42 @@ img { max-width: 100%; display: block; }
 .certif-pro:hover::before { transform: scaleX(1); }
 
 .certif-pro__icon {
-  width: 64px; height: 64px;
+  width: 72px; height: 72px;
   border-radius: 50%;
-  background: var(--color-night);
-  color: var(--color-gold);
+  background: var(--color-gold);
+  color: var(--color-night);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   position: relative;
   transition: all 0.4s var(--easing);
+  box-shadow: 0 8px 24px rgba(201, 169, 97, 0.25);
 }
 .certif-pro__icon::after {
   content: '';
   position: absolute;
   inset: -6px;
-  border: 1px solid var(--color-gold);
+  border: 1px solid var(--color-night);
   border-radius: 50%;
   opacity: 0;
   transition: opacity 0.4s, inset 0.4s;
 }
+.certif-pro:hover .certif-pro__icon {
+  background: var(--color-night);
+  color: var(--color-gold);
+  box-shadow: 0 8px 24px rgba(10, 31, 68, 0.25);
+}
 .certif-pro:hover .certif-pro__icon::after {
   opacity: 1;
   inset: -4px;
+  border-color: var(--color-gold);
 }
-.certif-pro__icon svg { width: 28px; height: 28px; }
+.certif-pro__icon svg {
+  width: 32px;
+  height: 32px;
+  stroke-width: 1.8;
+}
 
 .certif-pro strong {
   font-family: var(--font-serif);
