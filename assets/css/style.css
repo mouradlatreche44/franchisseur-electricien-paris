@@ -32,6 +32,8 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -41,6 +43,9 @@ body {
   line-height: 1.6;
   font-weight: 400;
   margin: 0;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
 
 /* ============== TYPOGRAPHY ============== */
@@ -1794,9 +1799,32 @@ img { max-width: 100%; display: block; }
 .mt-12 { margin-top: 3rem; }
 .mb-16 { margin-bottom: 4rem; }
 
-/* ============== MOBILE — Contraste textes sur photos ============== */
+/* ============== MOBILE — Fix overflow + contraste ============== */
 
 @media (max-width: 768px) {
+  /* Neutraliser les cadres or décalés qui débordent à droite */
+  .expertise__visual::after,
+  .about-teaser__photo::after,
+  .service-detail__visual::after {
+    inset: 0 !important;
+    border: 1px solid rgba(201, 169, 97, 0.4) !important;
+  }
+
+  /* Container : padding réduit sur iPhone pour gagner place */
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  /* Empêcher tout élément de dépasser horizontalement */
+  section, .container, .gallery-grid, .services-grid,
+  .certifs-pro-grid, .scenarios-grid, .reviews-track {
+    max-width: 100%;
+  }
+
+  /* Iframe carte responsive */
+  iframe { max-width: 100%; }
+
   /* Gallery captions : overlay plus opaque + texte plus gros */
   .gallery-item__overlay {
     background: linear-gradient(to top,
