@@ -1,5 +1,5 @@
 /* ===========================================
-   FRANCHISSEUR — Interactions
+   FRANCISSEUR — Interactions
    =========================================== */
 
 (function () {

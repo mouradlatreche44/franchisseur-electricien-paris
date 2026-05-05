@@ -2,7 +2,7 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "franchisseur-static",
+      "name": "francisseur-static",
       "runtimeExecutable": "npx",
       "runtimeArgs": ["--yes", "serve", "-p", "5180", "."],
       "port": 5180

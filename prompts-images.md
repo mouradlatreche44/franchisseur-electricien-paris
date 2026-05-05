@@ -1,4 +1,4 @@
-# Prompts images — FRANCHISSEUR Électricien Paris 8
+# Prompts images — FRANCISSEUR Électricien Paris 8
 
 Style global : éditorial premium, photoréaliste, palette bleu nuit + or chaud, lumière naturelle ou scénique chaleureuse, esthétique Architectural Digest / Maison & Demeure, jamais cliché "BTP rouge". Pas de texte intégré.
 
